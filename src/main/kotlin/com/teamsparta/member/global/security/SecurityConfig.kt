@@ -47,7 +47,5 @@ class SecurityConfig(
                 it.accessDeniedHandler(customAccessDeniedHandler)
             }
             .build()
-
-
     }
 }

@@ -5,3 +5,4 @@ data class SignupResponse(
     val email: String,
     val nickName: String,
 )
+
