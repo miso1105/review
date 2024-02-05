@@ -24,6 +24,7 @@ class Post(
     ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "post_id")
     var id: Long? = null
 
 
