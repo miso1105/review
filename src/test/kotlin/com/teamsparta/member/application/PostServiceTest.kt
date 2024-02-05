@@ -30,13 +30,14 @@ class PostServiceTest: BehaviorSpec ({
 
     Given("Post 목록이 존재하지 않을 때") {
         When("특정 Post를 요청하면") {
-            Then("IllegalArgumentException 발생해야한다")
+            Then("IllegalArgumentException 발생해야한다") {
 
-            val postId = 1L
-            every { postRepository.findByIdOrNull(any() ) } returns null
+                val postId = 1L
+                every { postRepository.findByIdOrNull(any()) } returns null
 
-            shouldThrow<IllegalArgumentException> {
-                postService.getPostById(postId)
+                shouldThrow<IllegalArgumentException> {
+                    postService.getPostById(postId)
+                }
             }
         }
     }
