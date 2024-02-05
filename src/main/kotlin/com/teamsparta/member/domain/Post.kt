@@ -28,6 +28,15 @@ class Post(
     var id: Long? = null
 
 
+    init {
+        if (this.title.isEmpty()  || this.title.length > 500) {
+            throw IllegalArgumentException()
+        }
+        if (this.content.isEmpty() || this.content.length > 5000)
+            throw IllegalArgumentException()
+    }
+
+
     fun update(request: PostRequest, authenticatedId: Long) {
         if (verify(authenticatedId)) {
             title = request.title
