@@ -15,4 +15,3 @@ data class SignUpRequest(
     val role: UserRole,
     var password: String,
 )
-

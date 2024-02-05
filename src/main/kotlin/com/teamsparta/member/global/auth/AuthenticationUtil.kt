@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component
 
 @Component
 object AuthenticationUtil {
+
     private fun getAuthentication(): UserPrincipal = SecurityContextHolder.getContext().authentication.principal as UserPrincipal
 
     fun getUserId() = getAuthentication().id

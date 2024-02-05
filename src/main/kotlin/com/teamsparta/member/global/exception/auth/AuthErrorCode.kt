@@ -19,4 +19,5 @@ enum class AuthErrorCode(
     override fun httpStatus() = httpStatus
 
     override fun message() = message
+
 }
