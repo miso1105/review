@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus
 
 class PostControllerTest2: BehaviorSpec ({
     val savedPostId = 1L
-    val notSavedPostId = 10L
     // 주입 뫀
     val postService = mockk<PostService>()
     // 테스트 할 레이어
