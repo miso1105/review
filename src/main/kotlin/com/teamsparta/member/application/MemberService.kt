@@ -11,6 +11,8 @@ import com.teamsparta.member.global.auth.jwt.JwtPlugin
 import com.teamsparta.member.global.exception.common.DuplicateEmailException
 import com.teamsparta.member.global.exception.common.NoSuchEntityException
 import com.teamsparta.member.repository.MemberRepository
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.MimeMessageHelper
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
@@ -25,6 +27,10 @@ class MemberService(
     private val encoder: BCryptPasswordEncoder,
     private val javaMailSender: JavaMailSender
 ) {
+
+    fun getPaginatedMemberList(pageable: Pageable): Page<SignupResponse> {
+        return memberRepository.findMembersByPageableAndInputStr(pageable).map { it.from() }
+    }
 
     @Transactional
     fun signup(request: SignUpRequest): SignupResponse {

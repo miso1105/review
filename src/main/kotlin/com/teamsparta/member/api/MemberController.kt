@@ -7,6 +7,9 @@ import com.teamsparta.member.dto.req.SignUpRequest
 import com.teamsparta.member.dto.res.EmailResponse
 import com.teamsparta.member.dto.res.SignupResponse
 import jakarta.validation.Valid
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
+import org.springframework.data.web.PageableDefault
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -17,6 +20,10 @@ import org.springframework.web.bind.annotation.*
 class MemberController(
     private val memberService: MemberService
 ) {
+    @GetMapping
+    fun getPaginatedMemberList(@PageableDefault (size = 5, sort = ["id"]) pageable: Pageable): ResponseEntity<Page<SignupResponse>> {
+        return ResponseEntity.status(HttpStatus.OK).body(memberService.getPaginatedMemberList(pageable))
+    }
 
     @PostMapping("/signup")
     fun signup(@Valid @RequestBody signupRequest: SignUpRequest): ResponseEntity<SignupResponse> {
@@ -37,6 +44,6 @@ class MemberController(
     @PostMapping("/sendmail")
     fun sendEmail(@RequestParam email: String): ResponseEntity<EmailResponse> {
         return ResponseEntity.status(HttpStatus.OK).body(memberService.sendEmail(email))
-
     }
+
 }
