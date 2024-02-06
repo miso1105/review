@@ -2,10 +2,13 @@ package com.teamsparta.member.domain
 
 import com.teamsparta.member.dto.req.PostRequest
 import com.teamsparta.member.dto.res.PostResponse
+import com.teamsparta.member.global.entity.BaseEntity
+import com.teamsparta.member.global.infra.config.CustomAuditorAware
 import jakarta.persistence.*
 import org.hibernate.annotations.OnDelete
 import org.hibernate.annotations.OnDeleteAction
 import org.springframework.security.access.AccessDeniedException
+import java.time.LocalDateTime
 
 @Entity
 @Table(name = "post")
@@ -19,14 +22,13 @@ class Post(
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)  // delete 쿼리 한개만 생성해 삭제 가능
     @JoinColumn(name = "member_id")
-    val member: Member
+    val member: Member,
 
-    ) {
+    ): BaseEntity() {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
     var id: Long? = null
-
 
     init {
         if (this.title.isEmpty()  || this.title.length > 500) {
@@ -57,7 +59,9 @@ class Post(
     fun from() = PostResponse(
         id = this.id!!,
         title = this.title,
-        content = this.content
+        content = this.content,
+        createdAt = createdAt,
+        createdBy = CustomAuditorAware().currentAuditor.get(),
     )
 
     companion object {
@@ -67,4 +71,5 @@ class Post(
             member = member
         )
     }
+
 }
