@@ -29,10 +29,12 @@ class Member(
     var refreshToken: String? = null,
 
 
+    @Column(name = "is_deleted")
+    var isDeleted: Boolean = false,
+
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     val role: UserRole,
-
 ) {
 
     @Id

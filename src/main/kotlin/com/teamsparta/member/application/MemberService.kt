@@ -48,6 +48,7 @@ class MemberService(
         val member = memberRepository.findMemberByEmail(request.email) ?: throw NoSuchEntityException()
         val jwt = jwtPlugin.generateJwt(member)
 
+        member.isDeleted = false
         member.saveRefreshToken(jwt.refreshToken)
 
         return jwt
@@ -61,6 +62,14 @@ class MemberService(
         member.removeRefreshToken()
 
 //        memberRepository.save(member)      @Transactional 안쓰면 따로 jpa 한테 시켜서 저장해야되고 어노테이션 쓰면 더티체킹으로 리프레시 토큰에 널값이 업데이트 된다
+    }
+
+    @Transactional
+    fun withDraw() {
+        val member = memberRepository.findMemberByEmail(getUserEmail()) ?: throw NoSuchEntityException()
+        member.isDeleted = true
+        member.refreshToken = null
+        memberRepository.save(member)
     }
 
     fun sendEmail(email: String): EmailResponse {

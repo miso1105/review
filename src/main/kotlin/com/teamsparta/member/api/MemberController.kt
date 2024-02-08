@@ -41,6 +41,12 @@ class MemberController(
         return ResponseEntity.status(HttpStatus.OK).build()
     }
 
+    @PutMapping("/withdraw")
+    fun withDraw() : ResponseEntity<Unit> {
+        return memberService.withDraw().let { ResponseEntity.status(HttpStatus.OK).build() }
+
+    }
+
     @PostMapping("/sendmail")
     fun sendEmail(@RequestParam email: String): ResponseEntity<EmailResponse> {
         return ResponseEntity.status(HttpStatus.OK).body(memberService.sendEmail(email))
