@@ -1,6 +1,7 @@
 package com.teamsparta.member.api
 
 import com.teamsparta.member.application.PostService
+import com.teamsparta.member.dto.PostSearchType
 import com.teamsparta.member.dto.UserRole
 import com.teamsparta.member.dto.req.PostRequest
 import com.teamsparta.member.dto.res.PostResponse
@@ -25,6 +26,10 @@ import org.springframework.web.bind.annotation.RestController
 class PostController(
     private val postService: PostService
 ) {
+    @GetMapping("/search")
+    fun getPostListByKeyword(@RequestParam(value = "keyword") keyword: String, searchType: PostSearchType, pageable: Pageable): ResponseEntity<Page<PostResponse>> {
+        return ResponseEntity.status(HttpStatus.OK).body(postService.search(keyword, searchType, pageable))
+    }
 
     @GetMapping
     fun getPaginatedPostList(@PageableDefault(size = 5, sort = ["id"]) pageable: Pageable,

@@ -1,6 +1,7 @@
 package com.teamsparta.member.application
 
 import com.teamsparta.member.domain.Post
+import com.teamsparta.member.dto.PostSearchType
 import com.teamsparta.member.dto.UserRole
 import com.teamsparta.member.dto.req.PostRequest
 import com.teamsparta.member.dto.res.PostResponse
@@ -21,6 +22,10 @@ class PostService(
     private val postRepository: PostRepository,
 
 ) {
+    fun search(keyword: String, searchType: PostSearchType, pageable: Pageable): Page<PostResponse> {
+        return postRepository.search(keyword, searchType, pageable).map { it.from() }
+    }
+
     fun getPaginatedPostList(pageable: Pageable, role: String?): Page<PostResponse> {
         val userRole = when(role) {
             "MEMBER" -> UserRole.MEMBER
@@ -63,6 +68,7 @@ class PostService(
         postRepository.delete(post)
 
     }
+
 
 
 }

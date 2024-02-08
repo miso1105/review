@@ -1,20 +1,39 @@
 package com.teamsparta.member.repository
 
 import com.querydsl.core.BooleanBuilder
+import com.querydsl.jpa.impl.JPAQueryFactory
 import com.teamsparta.member.domain.Post
 import com.teamsparta.member.domain.QMember.member
 import com.teamsparta.member.domain.QPost
+import com.teamsparta.member.dto.PostSearchType
 import com.teamsparta.member.dto.UserRole
 import com.teamsparta.member.global.infra.querydsl.QueryDslSupport
+import com.teamsparta.member.global.infra.querydsl.byPaging
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Repository
 
 @Repository
-class PostRepositoryImpl: QueryDslSupport(), CustomPostRepository {         // 인터페이스 기반으로 빈을 찾아서 이 구현체를 인식하는 것
+class PostRepositoryImpl(
+    private val jpaQueryFactory: JPAQueryFactory
+): QueryDslSupport(), CustomPostRepository {         // 인터페이스 기반으로 빈을 찾아서 이 구현체를 인식하는 것
 
     private val post = QPost.post
+
+    override fun search(keyword: String, searchType: PostSearchType, pageable: Pageable): Page<Post> {
+        return byPaging(pageable, post) {
+            jpaQueryFactory.selectFrom(post)
+                .where(
+                    when (searchType) {
+                        PostSearchType.TITLE -> post.title.like("%$keyword%")
+                        PostSearchType.CONTENT -> post.content.like("%$keyword%")
+                        PostSearchType.CREATED_BY -> post.content.like("%$keyword%")
+                        PostSearchType.NONE -> null
+                    }
+                )
+        }
+    }
 
     // userRole 이 널일 수 있으니까 동적쿼리로 구현해보기
     override fun findPostByPageableAndUserRole(pageable: Pageable, userRole: UserRole?): Page<Post> {
