@@ -1,11 +1,12 @@
 package com.teamsparta.member.application
 
 import com.teamsparta.member.domain.Member
+import com.teamsparta.member.dto.MemberSearchType
 import com.teamsparta.member.dto.req.LoginRequest
 import com.teamsparta.member.dto.req.SignUpRequest
 import com.teamsparta.member.dto.res.EmailResponse
 import com.teamsparta.member.dto.res.LoginResponse
-import com.teamsparta.member.dto.res.SignupResponse
+import com.teamsparta.member.dto.res.MemberResponse
 import com.teamsparta.member.global.auth.AuthenticationUtil.getUserEmail
 import com.teamsparta.member.global.auth.jwt.JwtPlugin
 import com.teamsparta.member.global.exception.common.DuplicateEmailException
@@ -27,13 +28,16 @@ class MemberService(
     private val encoder: BCryptPasswordEncoder,
     private val javaMailSender: JavaMailSender
 ) {
+    fun searchByMemberInfo(keyword: String, searchType: MemberSearchType , pageable: Pageable): Page<MemberResponse> {
+        return memberRepository.search(keyword, searchType, pageable).map { it.from() }
+    }
 
-    fun getPaginatedMemberList(pageable: Pageable): Page<SignupResponse> {
+    fun getPaginatedMemberList(pageable: Pageable): Page<MemberResponse> {
         return memberRepository.findMembersByPageableAndInputStr(pageable).map { it.from() }
     }
 
     @Transactional
-    fun signup(request: SignUpRequest): SignupResponse {
+    fun signup(request: SignUpRequest): MemberResponse {
 
         check (!memberRepository.existsMemberByEmail(request.email)) { throw DuplicateEmailException() }
 

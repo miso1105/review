@@ -2,7 +2,7 @@ package com.teamsparta.member.domain
 
 import com.teamsparta.member.dto.UserRole
 import com.teamsparta.member.dto.req.SignUpRequest
-import com.teamsparta.member.dto.res.SignupResponse
+import com.teamsparta.member.dto.res.MemberResponse
 import jakarta.persistence.*
 import org.springframework.security.crypto.password.PasswordEncoder
 import java.util.UUID
@@ -71,7 +71,8 @@ class Member(
     }
 
     // 반환
-    fun from() = SignupResponse (
+    fun from() = MemberResponse (
+        id = this.id!!,
         email = this.email,
         nickName = this.nickName
     )
