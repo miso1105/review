@@ -8,7 +8,6 @@ import jakarta.persistence.*
 import org.hibernate.annotations.OnDelete
 import org.hibernate.annotations.OnDeleteAction
 import org.springframework.security.access.AccessDeniedException
-import java.time.LocalDateTime
 
 @Entity
 @Table(name = "post")
@@ -19,7 +18,10 @@ class Post(
     @Column(name = "content")
     var content: String,
 
-    @ManyToOne
+    @Column(name = "created_by")
+    override var createdBy: String,
+
+    @ManyToOne(cascade = [CascadeType.PERSIST])
     @OnDelete(action = OnDeleteAction.CASCADE)  // delete 쿼리 한개만 생성해 삭제 가능
     @JoinColumn(name = "member_id")
     val member: Member,
@@ -60,14 +62,15 @@ class Post(
         id = this.id!!,
         title = this.title,
         content = this.content,
-        createdAt = createdAt,
-        createdBy = CustomAuditorAware().currentAuditor.get(),
+        createdAt = this.createdAt,
+        createdBy = this.createdBy,
     )
 
     companion object {
         fun of(request: PostRequest, member: Member) = Post(
             title = request.title,
             content = request.content,
+            createdBy = CustomAuditorAware().currentAuditor.get(),
             member = member
         )
     }

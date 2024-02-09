@@ -5,7 +5,6 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import java.util.UUID
-import kotlin.random.Random
 
 class PostTest: BehaviorSpec ({
     // 테스트 준비 - 테스트를 실행하기 위한 데이터 준비(포스트 생성자를 실행하는데 필요한 정보들)
@@ -13,13 +12,15 @@ class PostTest: BehaviorSpec ({
         val id = null
         val title = "title"
         val content = "content"
-        val member = Member("test@gmail.com","test", "test1234", null, UserRole.MEMBER)
+        val createdBy = "test@gmail.com"
+        val member = Member("test@gmail.com","test", "test1234", null,false, UserRole.MEMBER)
 
         // 테스트 실행 - 포스트 생성자 실행
         When("execute Post constructor") {
             val result = Post(
                 title = title,
                 content = content,
+                createdBy = createdBy,
                 member = member,
             )
 
@@ -34,16 +35,17 @@ class PostTest: BehaviorSpec ({
     }
 
     Given("information of Post with empty title") {
-        val id = null
         val title = ""
         val content = "content"
-        val member = Member("test@gmail.com","test", "test1234", null, UserRole.MEMBER)
+        val createdBy = "test@gmail.com"
+        val member = Member("test@gmail.com","test", "test1234", null, false ,UserRole.MEMBER)
 
         When("execute Post constructor") {
             val result = shouldThrow<IllegalArgumentException> {
                 Post(
                     title = title,
                     content = content,
+                    createdBy = createdBy,
                     member = member,
                 )
             }
@@ -57,16 +59,17 @@ class PostTest: BehaviorSpec ({
 
 
     Given("information of Post with empty content") {
-        val id = null
         val title = "title"
         val content = ""
-        val member = Member("test@gmail.com","test", "test1234", null, UserRole.MEMBER)
+        val createdBy = "test@gmail.com"
+        val member = Member("test@gmail.com","test", "test1234", null, false, UserRole.MEMBER)
 
         When("execute Post constructor") {
             val result = shouldThrow<IllegalArgumentException> {
                 Post(
                     title = title,
                     content = content,
+                    createdBy = createdBy,
                     member = member,
                 )
             }
@@ -79,16 +82,17 @@ class PostTest: BehaviorSpec ({
     }
 
     Given("information of Post title with over 500 characters") {
-        val id = null
         val title = (0..500).map { UUID.randomUUID().toString().replace("-","") }.joinToString()
         val content = "content"
-        val member = Member("test@gmail.com","test", "test1234", null, UserRole.MEMBER)
+        val createdBy = "test@gmail.com"
+        val member = Member("test@gmail.com","test", "test1234", null, false , UserRole.MEMBER)
 
         When("execute Post constructor") {
             val result = shouldThrow<IllegalArgumentException> {
                 Post(
                     title = title,
                     content = content,
+                    createdBy = createdBy,
                     member = member,
                 )
             }
@@ -100,16 +104,17 @@ class PostTest: BehaviorSpec ({
     }
 
     Given("information of Post content with over 5000 characters") {
-        val id = null
         val title = "title"
         val content = (0..5000).map { UUID.randomUUID().toString().replace("-","") }.joinToString()
-        val member = Member("test@gmail.com","test", "test1234", null, UserRole.MEMBER)
+        val createdBy = "test@gmail.com"
+        val member = Member("test@gmail.com","test", "test1234", null,false, UserRole.MEMBER)
 
         When("execute Post constructor") {
             val result = shouldThrow<IllegalArgumentException> {
                 Post(
                     title = title,
                     content = content,
+                    createdBy = createdBy,
                     member = member,
                 )
             }

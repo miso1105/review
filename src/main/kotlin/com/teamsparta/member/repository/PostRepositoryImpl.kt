@@ -1,12 +1,14 @@
 package com.teamsparta.member.repository
 
 import com.querydsl.core.BooleanBuilder
+import com.querydsl.core.types.Projections
 import com.querydsl.jpa.impl.JPAQueryFactory
 import com.teamsparta.member.domain.Post
 import com.teamsparta.member.domain.QMember.member
 import com.teamsparta.member.domain.QPost
 import com.teamsparta.member.dto.PostSearchType
 import com.teamsparta.member.dto.UserRole
+import com.teamsparta.member.dto.res.SimplePost
 import com.teamsparta.member.global.infra.querydsl.QueryDslSupport
 import com.teamsparta.member.global.infra.querydsl.byPaging
 import org.springframework.data.domain.Page
@@ -21,6 +23,22 @@ class PostRepositoryImpl(
 
     private val post = QPost.post
 
+//    override fun findPostsByEmail(email: String): List<SimplePost>? {
+//        return jpaQueryFactory.select(
+//            Projections.constructor(
+//                SimplePost::class.java,
+//                post.id,
+//                post.title,
+//                post.content,
+//                post.createdAt,
+//                post.createdBy
+//                )
+//            ).from(member)
+//            .where(post.createdBy.eq(email))
+//            .orderBy(post.createdBy.desc())
+//            .fetch()
+//    }
+
     override fun search(keyword: String, searchType: PostSearchType, pageable: Pageable): Page<Post> {
         return byPaging(pageable, post) {
             jpaQueryFactory.selectFrom(post)
@@ -28,7 +46,7 @@ class PostRepositoryImpl(
                     when (searchType) {
                         PostSearchType.TITLE -> post.title.like("%$keyword%")
                         PostSearchType.CONTENT -> post.content.like("%$keyword%")
-                        PostSearchType.CREATED_BY -> post.content.like("%$keyword%")
+                        PostSearchType.CREATED_BY -> post.createdBy.like("%$keyword%")
                         PostSearchType.NONE -> null
                     }
                 )
