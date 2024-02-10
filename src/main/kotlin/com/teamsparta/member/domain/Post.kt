@@ -5,6 +5,8 @@ import com.teamsparta.member.dto.res.PostResponse
 import com.teamsparta.member.global.entity.BaseEntity
 import com.teamsparta.member.global.infra.config.CustomAuditorAware
 import jakarta.persistence.*
+import org.hibernate.annotations.NotFound
+import org.hibernate.annotations.NotFoundAction
 import org.hibernate.annotations.OnDelete
 import org.hibernate.annotations.OnDeleteAction
 import org.springframework.security.access.AccessDeniedException
@@ -22,6 +24,7 @@ class Post(
     override var createdBy: String,
 
     @ManyToOne(cascade = [CascadeType.PERSIST])
+    @NotFound(action = NotFoundAction.IGNORE)
     @OnDelete(action = OnDeleteAction.CASCADE)  // delete 쿼리 한개만 생성해 삭제 가능
     @JoinColumn(name = "member_id")
     val member: Member,
