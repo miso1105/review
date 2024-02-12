@@ -48,6 +48,8 @@ class Post(
         if (verify(authenticatedId)) {
             title = request.title
             content = request.content
+            updatedAt = this.updatedAt
+            updatedBy = CustomAuditorAware().currentAuditor.get()
             return
         }
 

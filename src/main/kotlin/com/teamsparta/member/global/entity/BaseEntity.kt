@@ -18,16 +18,18 @@ import java.time.LocalDateTime
 abstract class BaseEntity (
 
     @CreatedDate
-    @Column(updatable = false)
+    @Column(name = "created_at", updatable = false)
     var createdAt: LocalDateTime = LocalDateTime.now(),
 
     @CreatedBy
-    @Column(updatable = false)
+    @Column(name = "created_by", updatable = false)
     var createdBy: String = "system",
 
     @LastModifiedDate
+    @Column(name = "updated_at")
     var updatedAt: LocalDateTime = LocalDateTime.now(),
 
     @LastModifiedBy
+    @Column(name = "updated_by")
     var updatedBy: String = "system"
     )

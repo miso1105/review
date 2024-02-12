@@ -5,7 +5,8 @@ import com.teamsparta.member.dto.req.SignUpRequest
 import com.teamsparta.member.dto.res.MemberResponse
 import jakarta.persistence.*
 import org.springframework.security.crypto.password.PasswordEncoder
-import java.util.UUID
+import java.time.LocalDateTime
+import java.util.*
 import kotlin.jvm.Transient
 
 
@@ -35,6 +36,10 @@ class Member(
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     val role: UserRole,
+
+    @Column(name = "created_at")
+    val createdAt: LocalDateTime
+
 ) {
 
     @Id
@@ -70,7 +75,8 @@ class Member(
     fun from() = MemberResponse (
         id = this.id!!,
         email = this.email,
-        nickName = this.nickName
+        nickName = this.nickName,
+        createdAt = this.createdAt
     )
 
     companion object {
@@ -78,9 +84,9 @@ class Member(
             email = request.email,
             nickName = request.nickName,
             password = request.password,
-            role = request.role
+            role = request.role,
+            createdAt = LocalDateTime.now()
         )
     }
-
 
 }
