@@ -42,7 +42,7 @@ class PostService(
         return post.from()
     }
 
-    @Transactional
+    @Transactional    // 트랜잭셔널을 빼면 오류가 나는데 멤버를 찾는 로직이 있어서인 것 같습니다.. 더 공부해보겠습니다..!
     fun createPost(request: PostRequest): PostResponse {
         val authenticatedEmail = getUserEmail()
         val member = memberRepository.findMemberByEmail(authenticatedEmail) ?: throw NoSuchEntityException()
