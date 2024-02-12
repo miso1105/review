@@ -2,6 +2,7 @@ package com.teamsparta.member.application
 
 import com.teamsparta.member.domain.Member
 import com.teamsparta.member.dto.MemberSearchType
+import com.teamsparta.member.dto.req.EmailRequest
 import com.teamsparta.member.dto.req.LoginRequest
 import com.teamsparta.member.dto.req.SignUpRequest
 import com.teamsparta.member.dto.res.EmailResponse
@@ -75,14 +76,14 @@ class MemberService(
         memberRepository.save(member)
     }
 
-    fun sendEmail(email: String): EmailResponse {
-        val member = memberRepository.findMemberByEmail(email) ?: throw NoSuchEntityException()
+    fun sendEmail(request: EmailRequest): EmailResponse {
+        val member = memberRepository.findMemberByEmail(request.email) ?: throw NoSuchEntityException()
         val randomCode = member.generateCode()
         val mail = javaMailSender.createMimeMessage()
         val mailHelper = MimeMessageHelper(mail, "UTF-8")
 
         mailHelper.setFrom("misopak06@gmail.com")
-        mailHelper.setTo(email)
+        mailHelper.setTo(request.email)
         mailHelper.setSubject("할일 카드 인증번호!")
         mailHelper.setText(randomCode)
         javaMailSender.send(mail)

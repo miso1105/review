@@ -2,6 +2,7 @@ package com.teamsparta.member.api
 
 import com.teamsparta.member.application.MemberService
 import com.teamsparta.member.dto.MemberSearchType
+import com.teamsparta.member.dto.req.EmailRequest
 import com.teamsparta.member.dto.req.LoginRequest
 import com.teamsparta.member.dto.res.LoginResponse
 import com.teamsparta.member.dto.req.SignUpRequest
@@ -54,8 +55,8 @@ class MemberController(
     }
 
     @PostMapping("/sendmail")
-    fun sendEmail(@RequestParam email: String): ResponseEntity<EmailResponse> {
-        return ResponseEntity.status(HttpStatus.OK).body(memberService.sendEmail(email))
+    fun sendEmail(@RequestBody emailRequest: EmailRequest): ResponseEntity<EmailResponse> {
+        return ResponseEntity.status(HttpStatus.OK).body(memberService.sendEmail(emailRequest))
     }
 
 }
