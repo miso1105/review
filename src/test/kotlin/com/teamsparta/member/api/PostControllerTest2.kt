@@ -7,13 +7,14 @@ import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockk
 import org.springframework.http.HttpStatus
+import java.time.LocalDateTime
 
 class PostControllerTest2: BehaviorSpec ({
     val savedPostId = 1L
     val postService = mockk<PostService>()
     val postController = PostController(postService)
 
-    val savedPost = PostResponse(savedPostId,"title", "content")
+    val savedPost = PostResponse(id = savedPostId, title ="title", content = "content", createdAt = LocalDateTime.now(), createdBy = "test")
     every { postService.getPostById(savedPostId) } returns savedPost
 
     Given("a saved post Id") {

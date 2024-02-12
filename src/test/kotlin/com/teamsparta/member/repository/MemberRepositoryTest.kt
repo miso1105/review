@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Import
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
 import org.springframework.test.context.ActiveProfiles
+import java.time.LocalDateTime
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -26,7 +27,7 @@ class MemberRepositoryTest @Autowired constructor(
 
     @Test
     fun sampleTest() {
-        memberRepository.save(Member("test@gmail.com","test","1234",null, false, UserRole.ADMIN))
+        memberRepository.save(Member(email = "test@gmail.com", nickName = "test", password = "1234", refreshToken = "", isDeleted = false, role = UserRole.MEMBER, createdAt = LocalDateTime.now()))
         entityManager.flush()
     }
 
@@ -117,7 +118,8 @@ class MemberRepositoryTest @Autowired constructor(
                 refreshToken = null,
                 nickName = "sample1",
                 isDeleted = false,
-                role = UserRole.MEMBER
+                role = UserRole.MEMBER,
+                createdAt = LocalDateTime.now()
             ),
             Member(
                 email = "sample2@gmail.com",
@@ -125,7 +127,8 @@ class MemberRepositoryTest @Autowired constructor(
                 refreshToken = null,
                 nickName = "sample2",
                 isDeleted = false,
-                role = UserRole.MEMBER
+                role = UserRole.MEMBER,
+                createdAt = LocalDateTime.now()
             ),
             Member(
                 email = "sample3@daum.net",
@@ -133,7 +136,8 @@ class MemberRepositoryTest @Autowired constructor(
                 refreshToken = null,
                 nickName = "sample3",
                 isDeleted = false,
-                role = UserRole.MEMBER
+                role = UserRole.MEMBER,
+                createdAt = LocalDateTime.now()
             ),
             Member(
                 email = "sample4@gmail.com",
@@ -141,7 +145,8 @@ class MemberRepositoryTest @Autowired constructor(
                 refreshToken = null,
                 nickName = "sample4",
                 isDeleted = false,
-                role = UserRole.MEMBER
+                role = UserRole.MEMBER,
+                createdAt = LocalDateTime.now()
             ),
             Member(
                 email = "sample5@naver.com",
@@ -149,7 +154,8 @@ class MemberRepositoryTest @Autowired constructor(
                 refreshToken = null,
                 nickName = "sample5",
                 isDeleted = false,
-                role = UserRole.MEMBER
+                role = UserRole.MEMBER,
+                createdAt = LocalDateTime.now()
             ),
             Member(
                 email = "sample6@daum.net",
@@ -157,7 +163,8 @@ class MemberRepositoryTest @Autowired constructor(
                 refreshToken = null,
                 nickName = "sample6",
                 isDeleted = false,
-                role = UserRole.MEMBER
+                role = UserRole.MEMBER,
+                createdAt = LocalDateTime.now()
             ),
             Member(
                 email = "sample7@naver.com",
@@ -165,7 +172,8 @@ class MemberRepositoryTest @Autowired constructor(
                 refreshToken = null,
                 nickName = "sample7",
                 isDeleted = false,
-                role = UserRole.MEMBER
+                role = UserRole.MEMBER,
+                createdAt = LocalDateTime.now()
             ),
             Member(
                 email = "sample8@gmail.com",
@@ -173,7 +181,8 @@ class MemberRepositoryTest @Autowired constructor(
                 refreshToken = null,
                 nickName = "sample8",
                 isDeleted = false,
-                role = UserRole.MEMBER
+                role = UserRole.MEMBER,
+                createdAt = LocalDateTime.now()
             ),
             Member(
                 email = "sample9@naver.com",
@@ -181,7 +190,8 @@ class MemberRepositoryTest @Autowired constructor(
                 refreshToken = null,
                 nickName = "sample9",
                 isDeleted = false,
-                role = UserRole.MEMBER
+                role = UserRole.MEMBER,
+                createdAt = LocalDateTime.now()
             ),
             Member(
                 email = "sample10@gmail.com",
@@ -189,7 +199,8 @@ class MemberRepositoryTest @Autowired constructor(
                 refreshToken = null,
                 nickName = "sample10",
                 isDeleted = false,
-                role = UserRole.MEMBER
+                role = UserRole.MEMBER,
+                createdAt = LocalDateTime.now()
             )
         )
     }

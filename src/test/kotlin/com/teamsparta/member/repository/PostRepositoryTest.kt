@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Import
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
 import org.springframework.test.context.ActiveProfiles
+import java.time.LocalDateTime
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -111,7 +112,8 @@ class PostRepositoryTest @Autowired constructor(
                 refreshToken = null,
                 nickName = "sample1",
                 isDeleted = false,
-                role = UserRole.MEMBER
+                role = UserRole.MEMBER,
+                createdAt = LocalDateTime.now()
             )),
             Post(title = "sample2",content = "aaaa", createdBy ="sample2@gmail.com", Member(
                 email = "sample2@gmail.com",
@@ -119,7 +121,8 @@ class PostRepositoryTest @Autowired constructor(
                 refreshToken = null,
                 nickName = "sample2",
                 isDeleted = false,
-                role = UserRole.MEMBER
+                role = UserRole.MEMBER,
+                createdAt = LocalDateTime.now()
             )),
             Post(title = "sample3",content = "aaaa", createdBy ="sample3@daum.net", Member(
                 email = "sample3@daum.net",
@@ -127,7 +130,8 @@ class PostRepositoryTest @Autowired constructor(
                 refreshToken = null,
                 nickName = "sample3",
                 isDeleted = false,
-                role = UserRole.MEMBER
+                role = UserRole.MEMBER,
+                createdAt = LocalDateTime.now()
             )),
             Post(title = "sample4",content = "bbbb", createdBy ="sample4@gmail.com", Member(
                 email = "sample4@gmail.com",
@@ -135,7 +139,8 @@ class PostRepositoryTest @Autowired constructor(
                 refreshToken = null,
                 nickName = "sample4",
                 isDeleted = false,
-                role = UserRole.MEMBER
+                role = UserRole.MEMBER,
+                createdAt = LocalDateTime.now()
             )),
             Post(title = "sample5",content = "bbbb", createdBy ="sample5@naver.com", Member(
                 email = "sample5@naver.com",
@@ -143,7 +148,8 @@ class PostRepositoryTest @Autowired constructor(
                 refreshToken = null,
                 nickName = "sample5",
                 isDeleted = false,
-                role = UserRole.MEMBER
+                role = UserRole.MEMBER,
+                createdAt = LocalDateTime.now()
             )),
             Post(title = "sample6", content = "bbbb", createdBy ="sample6@daum.net", Member(
                 email = "sample6@daum.net",
@@ -151,7 +157,8 @@ class PostRepositoryTest @Autowired constructor(
                 refreshToken = null,
                 nickName = "sample6",
                 isDeleted = false,
-                role = UserRole.MEMBER
+                role = UserRole.MEMBER,
+                createdAt = LocalDateTime.now()
             )),
             Post(title = "sample7",content = "cccc", createdBy ="sample7@naver.com", Member(
                 email = "sample7@naver.com",
@@ -159,7 +166,8 @@ class PostRepositoryTest @Autowired constructor(
                 refreshToken = null,
                 nickName = "sample7",
                 isDeleted = false,
-                role = UserRole.MEMBER
+                role = UserRole.MEMBER,
+                createdAt = LocalDateTime.now()
             )),
             Post(title = "sample8",content = "cccc", createdBy ="sample8@gmail.com", Member(
                 email = "sample8@gmail.com",
@@ -167,7 +175,8 @@ class PostRepositoryTest @Autowired constructor(
                 refreshToken = null,
                 nickName = "sample8",
                 isDeleted = false,
-                role = UserRole.MEMBER
+                role = UserRole.MEMBER,
+                createdAt = LocalDateTime.now()
             )),
             Post(title = "sample9",content = "cccc", createdBy ="sample9@naver.com", Member(
                 email = "sample9@naver.com",
@@ -175,7 +184,8 @@ class PostRepositoryTest @Autowired constructor(
                 refreshToken = null,
                 nickName = "sample9",
                 isDeleted = false,
-                role = UserRole.MEMBER
+                role = UserRole.MEMBER,
+                createdAt = LocalDateTime.now()
             )),
             Post( title = "sample10",content = "cccc", createdBy ="sample10@gmail.com", Member(
                 email = "sample10@gmail.com",
@@ -183,7 +193,8 @@ class PostRepositoryTest @Autowired constructor(
                 refreshToken = null,
                 nickName = "sample10",
                 isDeleted = false,
-                role = UserRole.MEMBER
+                role = UserRole.MEMBER,
+                createdAt = LocalDateTime.now()
             ))
         )
     }

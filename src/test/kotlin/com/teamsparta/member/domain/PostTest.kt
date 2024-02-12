@@ -4,6 +4,7 @@ import com.teamsparta.member.dto.UserRole
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
+import java.time.LocalDateTime
 import java.util.UUID
 
 class PostTest: BehaviorSpec ({
@@ -12,7 +13,7 @@ class PostTest: BehaviorSpec ({
         val title = "title"
         val content = "content"
         val createdBy = "test@gmail.com"
-        val member = Member("test@gmail.com","test", "test1234", null,false, UserRole.MEMBER)
+        val member = Member(email = "test@gmail.com", nickName = "test", password = "1234", refreshToken = "", isDeleted = false, role = UserRole.MEMBER, createdAt = LocalDateTime.now())
 
         When("execute Post constructor") {
             val result = Post(
@@ -35,7 +36,7 @@ class PostTest: BehaviorSpec ({
         val title = ""
         val content = "content"
         val createdBy = "test@gmail.com"
-        val member = Member("test@gmail.com","test", "test1234", null, false ,UserRole.MEMBER)
+        val member = Member(email = "test@gmail.com", nickName = "test", password = "1234", refreshToken = "", isDeleted = false, role = UserRole.MEMBER, createdAt = LocalDateTime.now())
 
         When("execute Post constructor") {
             val result = shouldThrow<IllegalArgumentException> {
@@ -58,7 +59,7 @@ class PostTest: BehaviorSpec ({
         val title = "title"
         val content = ""
         val createdBy = "test@gmail.com"
-        val member = Member("test@gmail.com","test", "test1234", null, false, UserRole.MEMBER)
+        val member = Member(email = "test@gmail.com", nickName = "test", password = "1234", refreshToken = "", isDeleted = false, role = UserRole.MEMBER, createdAt = LocalDateTime.now())
 
         When("execute Post constructor") {
             val result = shouldThrow<IllegalArgumentException> {
@@ -80,7 +81,7 @@ class PostTest: BehaviorSpec ({
         val title = (0..500).map { UUID.randomUUID().toString().replace("-","") }.joinToString()
         val content = "content"
         val createdBy = "test@gmail.com"
-        val member = Member("test@gmail.com","test", "test1234", null, false , UserRole.MEMBER)
+        val member = Member(email = "test@gmail.com", nickName = "test", password = "1234", refreshToken = "", isDeleted = false, role = UserRole.MEMBER, createdAt = LocalDateTime.now())
 
         When("execute Post constructor") {
             val result = shouldThrow<IllegalArgumentException> {
@@ -102,7 +103,7 @@ class PostTest: BehaviorSpec ({
         val title = "title"
         val content = (0..5000).map { UUID.randomUUID().toString().replace("-","") }.joinToString()
         val createdBy = "test@gmail.com"
-        val member = Member("test@gmail.com","test", "test1234", null,false, UserRole.MEMBER)
+        val member = Member(email = "test@gmail.com", nickName = "test", password = "1234", refreshToken = "", isDeleted = false, role = UserRole.MEMBER, createdAt = LocalDateTime.now())
 
         When("execute Post constructor") {
             val result = shouldThrow<IllegalArgumentException> {
