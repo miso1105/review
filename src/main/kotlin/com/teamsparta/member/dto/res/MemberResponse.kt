@@ -6,3 +6,4 @@ data class MemberResponse(
     val email: String,
     val nickName: String,
 )
+

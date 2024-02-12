@@ -4,3 +4,4 @@ data class PostRequest(
     val title: String,
     val content: String,
 )
+

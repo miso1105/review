@@ -20,6 +20,8 @@ bin/
 ### IntelliJ IDEA ###
 .idea
 application.yml
+application-local.yml
+application-test.yml
 *.iws
 *.iml
 *.ipr

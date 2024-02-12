@@ -196,3 +196,4 @@ class MemberRepositoryTest @Autowired constructor(
 
 }
 
+

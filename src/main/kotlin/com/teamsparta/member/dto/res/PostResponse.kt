@@ -9,3 +9,4 @@ data class PostResponse(
     val createdAt: LocalDateTime,
     val createdBy: String,
 )
+

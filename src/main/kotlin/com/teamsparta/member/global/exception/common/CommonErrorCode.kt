@@ -21,3 +21,4 @@ enum class CommonErrorCode(
 
     override fun message(): String = message
 }
+
