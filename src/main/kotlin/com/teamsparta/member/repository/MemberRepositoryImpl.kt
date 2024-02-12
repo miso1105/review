@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class MemberRepositoryImpl(
-    private val jpaQueryFactory: JPAQueryFactory  // 쿼리팩토리 추상 클래스 상속 방법과 주입 방법 두가지가 있다
+    private val jpaQueryFactory: JPAQueryFactory
 ): QueryDslSupport(), CustomMemberRepository {
 
     private val member = QMember.member

@@ -10,7 +10,6 @@ import org.springframework.security.core.AuthenticationException
 import org.springframework.security.web.AuthenticationEntryPoint
 import org.springframework.stereotype.Component
 
-// 사용자 인증이 실패했을때 호출
 @Component
 class CustomAuthenticationEntryPoint: AuthenticationEntryPoint {
 

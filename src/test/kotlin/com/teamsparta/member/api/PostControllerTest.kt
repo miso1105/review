@@ -25,7 +25,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 @AutoConfigureMockMvc
 @ExtendWith(MockKExtension::class)
 class PostControllerTest @Autowired constructor(
-    private val mockMvc: MockMvc,// MockMvc 를 기반으로 실제 api 를 호출
+    private val mockMvc: MockMvc,
     private val jwtPlugin: JwtPlugin
 ): DescribeSpec({
     extension(SpringExtension)

@@ -10,7 +10,6 @@ import jakarta.persistence.EntityManager
 import jakarta.persistence.PersistenceContext
 import org.springframework.data.domain.Pageable
 
-// 직접 사용하는 것이 아니니까 추상 클래스로 만들어주고, 상속 받는 클래스들이 쿼리팩토리와 엔티티매니저를 사용할 수 있게
 abstract class QueryDslSupport {
 
     @PersistenceContext

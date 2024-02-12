@@ -45,9 +45,6 @@ class Member(
     @Transient
     val rawPassword: String = ""
 
-//    @Transient
-//    val emailCode: String = ""
-
 
     fun encodePassword(encoder: PasswordEncoder): Member {
         this.password = encoder.encode(rawPassword)
@@ -70,7 +67,6 @@ class Member(
         return randomStr
     }
 
-    // 반환
     fun from() = MemberResponse (
         id = this.id!!,
         email = this.email,
@@ -78,7 +74,6 @@ class Member(
     )
 
     companion object {
-        // toEntity
         fun of(request: SignUpRequest) = Member (
             email = request.email,
             nickName = request.nickName,
@@ -87,14 +82,5 @@ class Member(
         )
     }
 
-
-//        fun ofMember(req: SignUpRequest) {
-//
-//        }
-//
-//        fun ofAdmin() {
-//
-//        }
-//    }
 
 }

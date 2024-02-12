@@ -21,7 +21,6 @@ class JwtAuthenticationFilter(
         private val BEARER_PATTERN = Regex("^Bearer (.+?)$")
     }
 
-    // HttpServletRequest 에서 토큰 바로 가져와
     private fun HttpServletRequest.getBearerToken(): String? {
         val headerValue = this.getHeader(HttpHeaders.AUTHORIZATION) ?: return null
         return BEARER_PATTERN.find(headerValue)?.groupValues?.get(1)
@@ -33,7 +32,6 @@ class JwtAuthenticationFilter(
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
-        // 엑세스 토큰만
         val jwt = request.getBearerToken()
 
         if (jwt != null) {
@@ -55,9 +53,9 @@ class JwtAuthenticationFilter(
                         principal = principal,
                         details = WebAuthenticationDetailsSource().buildDetails(request)
                     )
-                    SecurityContextHolder.getContext().authentication = authentication // 현재 사용자의 인증정보
-                }.onFailure { exception ->  // 실패한 예외 객체를 받는 매개변수, 이 예외는 엔트리포인트로
-                    when (exception) {  // HttpServletRequest 의 속성(attribute)에 설정(String, Object)
+                    SecurityContextHolder.getContext().authentication = authentication
+                }.onFailure { exception ->
+                    when (exception) {
                         is ExpiredJwtException -> request.setAttribute("exception", AuthErrorCode.EXPIRED_ACCESS_TOKEN)
                         else -> request.setAttribute("exception", AuthErrorCode.COMMON_UNAUTHORIZED)
                     }

@@ -26,7 +26,7 @@ class SecurityConfig(
         return http
             .headers {
                 it.frameOptions { it.sameOrigin() }
-            } // h2 쓰려고 추가
+            }
             .httpBasic { it.disable() }
             .formLogin { it.disable() }
             .csrf { it.disable() }
@@ -38,7 +38,7 @@ class SecurityConfig(
                     "/swagger-ui/**",
                     "/v3/api-docs/**"
                 ).permitAll()
-                    .requestMatchers(PathRequest.toH2Console()).permitAll()  // h2 쓰려고 추가
+                    .requestMatchers(PathRequest.toH2Console()).permitAll()
                     .anyRequest().authenticated()
             }
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)

@@ -23,7 +23,6 @@ class PostServiceTest: BehaviorSpec ({
     extension(SpringExtension)
     val memberRepository = mockk<MemberRepository>()
     val postRepository = mockk<PostRepository>()
-    // 서비스에서 생성자 주입 썼던 순서대로 써야한다
     val postService = PostService(memberRepository, postRepository)
 
 
@@ -37,7 +36,6 @@ class PostServiceTest: BehaviorSpec ({
     every { postRepository.findByIdOrNull(savedPostId) } returns savedPost
     every { postRepository.findByIdOrNull(notSavedPostId) } returns null
 
-    // 잘 반환하는지, 저장 잘 되는지 테스트
     Given("a saved post id") {
         val targetPostId = savedPostId
 
@@ -68,10 +66,6 @@ class PostServiceTest: BehaviorSpec ({
             }
         }
     }
-
-//    afterContainer {
-//        clearAllMocks()
-//    }
 
 
     Given("Post 목록이 존재하지 않을 때") {

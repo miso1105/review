@@ -25,7 +25,7 @@ class Post(
 
     @ManyToOne(cascade = [CascadeType.PERSIST])
     @NotFound(action = NotFoundAction.IGNORE)
-    @OnDelete(action = OnDeleteAction.CASCADE)  // delete 쿼리 한개만 생성해 삭제 가능
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "member_id")
     val member: Member,
 

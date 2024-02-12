@@ -27,7 +27,7 @@ class MemberRepositoryTest @Autowired constructor(
     @Test
     fun sampleTest() {
         memberRepository.save(Member("test@gmail.com","test","1234",null, false, UserRole.ADMIN))
-        entityManager.flush()  // 쓰기 지연 저장소에 쌓이지 않고 지금 실행하기 위해서 쓰기 지연 저장소를 비우는 플러쉬 직접 호출.
+        entityManager.flush()
     }
 
 

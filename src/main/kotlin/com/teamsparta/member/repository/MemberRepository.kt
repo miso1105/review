@@ -9,9 +9,6 @@ interface MemberRepository: JpaRepository<Member, Long>, CustomMemberRepository 
 
     fun findMemberByEmail(email: String): Member?
 
-    // 쿼리 안나간 메서드
-//    fun exitsByEmail(email: String): Boolean
-//
-//    fun findByEmail(email: String): Member?
+
 
 }
